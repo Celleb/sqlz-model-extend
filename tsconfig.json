@@ -22,13 +22,7 @@
     "strictNullChecks": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "baseUrl": ".",
-    "paths": {
-      "@enums": ["./src/enums"],
-      "@utils/*": ["./src/utils/*"],
-      "@shared/*": ["./src/shared/*"],
-      "src/*": ["./src/*"]
-    }
+    "baseUrl": "."
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "**/*.spec.ts", "./scripts"],

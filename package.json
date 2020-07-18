@@ -1,7 +1,7 @@
 {
-  "name": "@celleb/ts-skeleton",
+  "name": "@celleb/sqlz-model-extend",
   "version": "0.0.1",
-  "description": "Typescript project skeleton",
+  "description": "Extends sequelize model",
   "scripts": {
     "build": "npx tsc",
     "build:watch": "npx tsc --watch",
@@ -13,11 +13,10 @@
     "test:watch": "npx jest --watch"
   },
   "keywords": [
-    "Typescript",
-    "getting",
-    "project",
-    "started",
-    "setup"
+    "Sequelize",
+    "Model",
+    "Return",
+    "Raw"
   ],
   "dependencies": {},
   "devDependencies": {
@@ -26,17 +25,21 @@
     "@typescript-eslint/eslint-plugin": "^3.3.0",
     "@typescript-eslint/parser": "^3.3.0",
     "jest": "^26.0.1",
+    "sequelize": "^6.3.3",
     "ts-jest": "^26.1.0",
-    "typescript": "^3.9.5"
+    "typescript": "^3.9.7"
+  },
+  "peerDependencies": {
+    "sequelize": "^6.3.3"
   },
   "author": "Jonas <celleb@mrcelleb.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Celleb/ts-skeleton/issues"
+    "url": "https://github.com/Celleb/sqlz-model-extend/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Celleb/ts-skeleton.git"
+    "url": "git+https://github.com/Celleb/sqlz-model-extend.git"
   },
-  "homepage": "https://github.com/Celleb/ts-skeleton/blob/master/README.md"
+  "homepage": "https://github.com/Celleb/sqlz-model-extend/blob/main/README.md"
 }
