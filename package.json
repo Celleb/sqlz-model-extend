@@ -1,0 +1,42 @@
+{
+  "name": "@celleb/ts-skeleton",
+  "version": "0.0.1",
+  "description": "Typescript project skeleton",
+  "scripts": {
+    "build": "npx tsc",
+    "build:watch": "npx tsc --watch",
+    "package": "node ./scripts/override-package.js",
+    "preversion": "npm run test",
+    "version": "npm run build && npm run package && git add .",
+    "postversion": "git push && git push --tags",
+    "test": "npx jest",
+    "test:watch": "npx jest --watch"
+  },
+  "keywords": [
+    "Typescript",
+    "getting",
+    "project",
+    "started",
+    "setup"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jest": "^26.0.0",
+    "@types/node": "^14.0.13",
+    "@typescript-eslint/eslint-plugin": "^3.3.0",
+    "@typescript-eslint/parser": "^3.3.0",
+    "jest": "^26.0.1",
+    "ts-jest": "^26.1.0",
+    "typescript": "^3.9.5"
+  },
+  "author": "Jonas <celleb@mrcelleb.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Celleb/ts-skeleton/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Celleb/ts-skeleton.git"
+  },
+  "homepage": "https://github.com/Celleb/ts-skeleton/blob/master/README.md"
+}
