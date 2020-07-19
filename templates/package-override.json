@@ -1,4 +1,5 @@
 {
+  "name": "@celleb/sqlz-model-extend",
   "main": "./index.js",
   "types": "./index.d.ts",
   "scripts": {},

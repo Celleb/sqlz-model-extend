@@ -1,0 +1,31 @@
+{
+  "name": "@celleb/sqlz-model-extend",
+  "version": "0.0.1",
+  "description": "Extends sequelize model",
+  "scripts": {},
+  "keywords": [
+    "Sequelize",
+    "Model",
+    "Return",
+    "Raw"
+  ],
+  "dependencies": {
+    "lodash.assign": "^4.2.0"
+  },
+  "devDependencies": {},
+  "peerDependencies": {
+    "sequelize": "^6.3.3"
+  },
+  "author": "Jonas <celleb@mrcelleb.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Celleb/sqlz-model-extend/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Celleb/sqlz-model-extend.git"
+  },
+  "homepage": "https://github.com/Celleb/sqlz-model-extend/blob/main/README.md",
+  "main": "./index.js",
+  "types": "./index.d.ts"
+}

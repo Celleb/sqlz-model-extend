@@ -5,7 +5,6 @@
  * All rights reserved
  */
 
-import { extend } from './utils';
 import {
     ModelCtor,
     Model,
@@ -19,24 +18,33 @@ import {
     UpsertOptions,
 } from 'sequelize';
 
+import assign from 'lodash.assign';
+
 export type ModelType<R, W> = ModelCtor<Model<R, W>> | ModelDefined<R, W>;
 export type DataRecord<R, W> = Model<R, W> | R | null;
+
+import { Sequelize } from 'sequelize';
+
+export interface DbDefined extends Record<string, any> {
+    Sequelize: Sequelize;
+    sequelize: Sequelize;
+}
+
 /**
  * Extends sequelize model with methods that returns POJO with correct types
  * This ensures you get the correct data types in typescript.
  * @param model Sequelize
  */
 export function extendModel<R, W>(model: ModelType<R, W>) {
-    return extend(model, {
+    return assign(model, {
         async bulkInsert(
             this: typeof model,
             records: W[],
-            options: BulkCreateOptions<R>
+            options?: BulkCreateOptions<R>
         ): Promise<R[]> {
-            const results = await this.bulkCreate(records, { ...options });
-            return results.map((result) => result.toJSON()) as any;
+            return recordsToJson(await this.bulkCreate(records, options), false);
         },
-        async getAll(this: typeof model, options: FindOptions<R> = {}): Promise<R[]> {
+        async getAll(this: typeof model, options: FindOptions<R> = { raw: false }): Promise<R[]> {
             return recordsToJson(await this.findAll(options), !!options.raw);
         },
         async getByPk(
@@ -44,11 +52,13 @@ export function extendModel<R, W>(model: ModelType<R, W>) {
             value: Identifier,
             options?: Omit<FindOptions<R>, 'where' | 'rejectOnEmpty'>
         ): Promise<R | null> {
-            const record = (await this.findByPk(value, {
-                ...(options || {}),
-                rejectOnEmpty: false,
-            })) as any;
-            return recordToJson(record, !!options?.raw);
+            return recordToJson(
+                await this.findByPk(value, {
+                    ...(options || {}),
+                    rejectOnEmpty: false,
+                }),
+                !!options?.raw
+            );
         },
         async getOne(
             this: typeof model,
@@ -78,10 +88,13 @@ export function extendModel<R, W>(model: ModelType<R, W>) {
             options: UpdateOptions<R>
         ): Promise<R[]> {
             const [, records] = await this.update(values, { ...options, returning: true });
+            if (typeof records === 'number') {
+                return [];
+            }
             return recordsToJson(records, false);
         },
-        async upPatch(this: typeof model, values: W, options: UpsertOptions<R>): Promise<R> {
-            const [record] = await this.upsert(values, { ...options, returning: true });
+        async upPatch(this: typeof model, values: W, options?: UpsertOptions<R>): Promise<R> {
+            const [record] = await this.upsert(values, { ...(options || {}), returning: true });
             return recordToJson(record, false);
         },
     });
