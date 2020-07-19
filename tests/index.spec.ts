@@ -7,6 +7,7 @@
 
 import { extendModel, DbDefined } from '../dist';
 import { ModelDefined } from 'sequelize';
+import { copyFileSync, unlinkSync } from 'fs';
 const { exec } = require('child_process');
 
 const db: DbDefined = require('./models');
@@ -25,12 +26,8 @@ type UserReadAttributes = Required<UserWriteAttributes> & {
 };
 
 describe('tests', () => {
-    it('must be defined', () => {
-        expect(extendModel).toBeDefined;
-    });
-
     beforeAll((done) => {
-        console.log('running migrations');
+        copyFileSync(__dirname + '/db/initial.sqlite', __dirname + '/db/test.sqlite');
         exec('npx sequelize-cli db:migrate', (err: any, stdout: any, stderr: any) => {
             if (err) {
                 console.log(`stderr: ${stderr}`);
@@ -42,10 +39,10 @@ describe('tests', () => {
         });
     });
 
-    afterAll(async () => {
-        await db.sequelize.drop();
-        await db.sequelize.dropSchema('SequelizeMeta', { logging: false });
+    afterAll(() => {
         db.sequelize.close();
+        console.log('delete');
+        unlinkSync(__dirname + '/db/test.sqlite');
     });
 
     describe('extendModel', () => {
@@ -119,7 +116,7 @@ describe('tests', () => {
             });
 
             it('finds a record by its primary key and returns `null` when not found', async () => {
-                const user = await userModel.getByPk(null);
+                const user = await userModel.getByPk(1000);
                 expect(user).toEqual(null);
             });
         });

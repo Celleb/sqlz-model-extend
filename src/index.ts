@@ -42,7 +42,10 @@ export function extendModel<R, W>(model: ModelType<R, W>) {
             records: W[],
             options?: BulkCreateOptions<R>
         ): Promise<R[]> {
-            return recordsToJson(await this.bulkCreate(records, options), false);
+            return recordsToJson(
+                await this.bulkCreate(records, { ...(options || {}), returning: true }),
+                false
+            );
         },
         async getAll(this: typeof model, options: FindOptions<R> = { raw: false }): Promise<R[]> {
             return recordsToJson(await this.findAll(options), !!options.raw);
