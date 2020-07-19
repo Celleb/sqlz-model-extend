@@ -1,6 +1,6 @@
 {
   "name": "sqlz-model-extend",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Extends sequelize model",
   "scripts": {
     "build": "npx tsc && npm run package",

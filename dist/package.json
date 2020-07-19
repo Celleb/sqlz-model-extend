@@ -1,6 +1,6 @@
 {
   "name": "@celleb/sqlz-model-extend",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Extends sequelize model",
   "scripts": {},
   "keywords": [
