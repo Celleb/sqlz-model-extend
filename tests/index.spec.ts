@@ -41,7 +41,6 @@ describe('tests', () => {
 
     afterAll(() => {
         db.sequelize.close();
-        console.log('delete');
         unlinkSync(__dirname + '/db/test.sqlite');
     });
 
