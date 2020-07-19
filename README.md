@@ -1,5 +1,7 @@
 # @celleb/sqlz-model-extend
 
+![Build](https://github.com/Celleb/sqlz-model-extend/workflows/Build/badge.svg?branch=main) ![Test](https://github.com/Celleb/sqlz-model-extend/workflows/Test/badge.svg?branch=main)
+
 Extends sequelize model instance with additional methods that returns the `raw` or `toJSON` object(s).
 The return types of these methods are set to the read-attributes of the specified model.
 
